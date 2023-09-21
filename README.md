@@ -75,9 +75,9 @@ This command generates documentation based on the project's code and structure.
 View the generated documentation locally by serving it on a local server at port 4000. Use:
 
 ```bash
-forge doc --serve --port 4000
+forge doc --serve --port 4001
 ```
 
-Access the documentation through your web browser by navigating to <http://localhost:4000>.
+Access the documentation through your web browser by navigating to <http://localhost:4001>.
 
 Explore and understand the project using the provided documentation. If you encounter any issues or need assistance, please reach out for support. We're here to help! 🤝
