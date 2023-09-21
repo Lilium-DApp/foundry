@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.20;
 
+import {CarbonCreditData} from "@structs/CarbonCreditData.sol";
 import {IInputBox} from "@cartesi/contracts/inputs/IInputBox.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {CarbonCreditData} from "@structs/CarbonCreditData.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/interfaces/AggregatorV3Interface.sol";
 
