@@ -42,23 +42,15 @@ Welcome to the project documentation! This repository contains essential documen
     $ make company certifier="CERTIFIER_CONTRACT_ADDRESS" cid="QmQp9iagQS9uEQPV7hg5YGwWmCXxAs2ApyBCkpcu9ZAK6k" name="Gerdau" country="Brazil" industry="Steelworks" allowance="100000000" compensation_per_hour="10000" CONFIG="--network sepolia"
     ```
 
-- Set the device contract:
-
-    ```bash
-    $ make device company="COMPANY_CONTRACT_ADDRESS" CONFIG="--network sepolia"
-    ```
-
-- Set the auxiliary contract:
+- After you deploy the Cartesi machines, run the command below with the addresses of the dapp:
 
     ```bash
     $ make auxiliary company="COMPANY_CONTRACT_ADDRESS" verifier="VERIFIER_CONTRACT_ADDRESS" auction="AUCTION_CONTRACT_ADDRESS" CONFIG="--network sepolia"
     ```
+- To interact with the Cartesi machines, follow the instructions contained in the readme of each one:
 
-- Verify the real world state:
-
-    ```bash
-    $ make verify company="COMPANY_CONTRACT_ADDRESS" CONFIG="--network sepolia"
-    ```
+    - Verfier: https://github.com/Lilium-DApp/verifier
+    - Auction: https://github.com/Lilium-DApp/auction
 
 ## 3. Generating Documentation 📖
 
