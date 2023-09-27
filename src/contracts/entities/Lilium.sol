@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.20;
 
-import {ILilium} from "@interfaces/ILilium.sol";
+import {ILiliumFactory} from "@interfaces/ILiliumFactory.sol";
 import {LiliumData} from "@structs/LiliumData.sol";
 import {ICarbonCredit} from "@interfaces/ICarbonCredit.sol";
 import {ForestReserveData} from "@structs/ForestReserveData.sol";
@@ -66,21 +66,21 @@ contract Lilium is AccessControl {
         address _agent
     ) public onlyRole(AGENT_ROLE) returns (address) {
         ForestReserve forestReserve = new ForestReserve(
-            ILilium(lilium.factory).getToken(address(this)),
+            ILiliumFactory(lilium.factory).getToken(address(this)),
             _geographicLocation,
             _vegetation,
             _carbonCreditsEmitted,
             _weatherConditions,
             _hourlyCompensation,
             lilium.cartesiInputBox,
-            lilium.cartesiEtherPortal,
             lilium.cartesiERC20Portal,
+            lilium.cartesiEtherPortal,
             lilium.cartesiDAppAddressRelay,
             _agent
         );
         _grantRole(DEFAULT_ADMIN_ROLE, _agent);
         _grantRole(AGENT_ROLE, _agent);
-        ICarbonCredit(ILilium(lilium.factory).getToken(address(this))).grantRole(MINTER_ROLE, address(forestReserve));
+        ICarbonCredit(ILiliumFactory(lilium.factory).getToken(address(this))).grantRole(MINTER_ROLE, address(forestReserve));
         emit NewCompany(address(forestReserve));
         return (address(forestReserve));
     }

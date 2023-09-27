@@ -50,7 +50,7 @@ contract DeployLilium is Script {
 
         // Create Lilium
         vm.startBroadcast(_liliumAgent);
-        (address lilium,) = liliumFactory.newLilium(_liliumAgentAddress, _tokenName, _tokenSymbol, _tokenDecimals);
+        (address lilium, address carbonCredit) = liliumFactory.newLilium(_liliumAgentAddress, _tokenName, _tokenSymbol, _tokenDecimals);
         vm.stopBroadcast();
 
         // Create Forest Reserve
@@ -71,6 +71,9 @@ contract DeployLilium is Script {
         ForestReserve(forestReserve).stake(1000);
         vm.stopBroadcast();
 
-        console.log("Lilium Factory Address: %s; Lilium Address: %s; Forest Reserve Address: %s", address(liliumFactory), address(lilium), address(forestReserve));
+        console.log("Lilium Factory Address: %s;", address(liliumFactory));
+        console.log("Lilium Address: %s;", address(lilium));
+        console.log("Forest Reserve Address: %s;",address(forestReserve));
+        console.log("Carbon Credit Address: %s;", address(carbonCredit));
     }
 }

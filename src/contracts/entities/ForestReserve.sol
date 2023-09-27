@@ -174,12 +174,13 @@ contract ForestReserve is AccessControl {
         if (!approve) {
             revert GrantAllowanceFailed(forestReserve.cartesiERC20Portal, msg.sender, _amount);
         } else {
+            uint256 duration = _duration * 1 hours;
             bytes memory _execLayerData =
-                abi.encodePacked(msg.sig, msg.sender, _duration * 1 hours, _reservePricePerToken);
+                abi.encodePacked(msg.sig, msg.sender, duration, _reservePricePerToken);
             IERC20Portal(forestReserve.cartesiERC20Portal).depositERC20Tokens(
                 IERC20(forestReserve.token), forestReserve.cartesiAuction, _amount, _execLayerData
             );
-            emit NewAuction(msg.sig, msg.sender, _amount, _duration * 1 hours, _reservePricePerToken);
+            emit NewAuction(msg.sig, msg.sender, _amount, duration, _reservePricePerToken);
         }
     }
 
