@@ -67,8 +67,8 @@ contract ForestReserve is AccessControl {
     }
 
     /**
-     * @notice Set Cartesi Certifier Contract
-     * @dev This function set cartesi verifier and auction contract address after deploy, because it is not possible to set it before deploy since the cartesi machine is deployed later. In addition, it grant verifier and auction role to the contracts and send cartesi machine address to cartesi dapp via relay
+     * @notice Set Cartesi DApps Contracts
+     * @dev This function set cartesi verifier and auction contract address after deploy, because it is not possible to set it before deploy since the cartesi machine is deployed later. In addition, it send cartesi machine auction address to cartesi dapp via relay
      * @param _cartesiAuction address of cartesi auction contract
      * @param _cartesiVerifier address of cartesi verifier contract
      */
@@ -101,8 +101,8 @@ contract ForestReserve is AccessControl {
     }
 
     /**
-     * @notice Decrease allowance to mint token
-     * @dev This function decrease allowance to mint token. This function is private because only mint function can call this function
+     * @notice Decrease allowance to stake token
+     * @dev This function decrease allowance to stake token. This function is private because only stake function can call this function
      * @param _amount amount of token to decrease allowance
      */
     function _decreaseAllowance(address _sender, uint256 _amount) private {
@@ -141,8 +141,8 @@ contract ForestReserve is AccessControl {
     }
 
     /**
-     * @notice Increase allowance to mint token
-     * @dev This function increase allowance to mint token. Only verifier cartesi machine can call this function
+     * @notice Increase allowance to stake token
+     * @dev This function increase allowance to stake token. Only verifier cartesi machine can call this function
      */
     function increaseAllowance() external onlyRole(VERIFIER_ROLE) {
         forestReserve.carbonCreditsEmitted += forestReserve.hourlyCompensation;
@@ -202,7 +202,7 @@ contract ForestReserve is AccessControl {
     }
 
     /**
-     * @notice finishAuction to Auction Cartesi Machine
+     * @notice Finish Auction inside of Cartesi Machine
      * @dev This function send a finish command to Auction Cartesi Machine. This function need be called by the same person who called newAuction function.
      */
     function finishAuction() public {

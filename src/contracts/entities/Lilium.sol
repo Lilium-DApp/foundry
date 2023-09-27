@@ -49,7 +49,7 @@ contract Lilium is AccessControl {
     }
 
     /**
-     * @notice This function is responsible for create new forest reserve contract
+     * @notice This function is responsible for create new forest reserve
      * @param _geographicLocation Forest reserve geographic location
      * @param _vegetation Forest reserve vegetation
      * @param _carbonCreditsEmitted Forest reserve carbon credits emitted

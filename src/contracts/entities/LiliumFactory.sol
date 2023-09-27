@@ -45,8 +45,8 @@ contract LiliumFactory is AccessControl {
     }
 
     /**
-     * @notice Get Cartesi Certifier Contract Address
-     * @dev This function get cartesi certifier contract address. This function is external because it is called by certifier contract
+     * @notice Get Token Contract Address
+     * @dev This function get token contract address. This function is external because it is called by certifier contract
      * @return address of cartesi certifier contract
      */
     function getToken(address _certifier) external view returns (address) {
@@ -55,8 +55,8 @@ contract LiliumFactory is AccessControl {
     }
 
     /**
-     * @notice Create new certifier
-     * @dev This function create new certifier contract and token contractaddress
+     * @notice Create Lilium
+     * @dev This function create lilium contract and token contract address
      * @param _agent agent address
      * @param tokenName token name
      * @param tokenSymbol token symbol

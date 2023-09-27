@@ -3,8 +3,8 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title Lilium
- * @dev Lilium struct store Certifier data
+ * @title Lilium Data
+ * @dev Lilium struct store Lilium data
  */
 struct LiliumData {
     address factory;

@@ -3,8 +3,8 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title Company
- * @dev Company struct store Company data
+ * @title Forest Reserve Data
+ * @dev Forest Reserve struct store Forest data
  */
 struct ForestReserveData {
     address token;

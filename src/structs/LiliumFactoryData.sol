@@ -3,8 +3,8 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title Lilium
- * @dev Lilium struct store Lilium data
+ * @title Lilium Factory Data
+ * @dev Lilium Factory struct store Lilium Factory data
  */
 struct LiliumFactoryData {
     address cartesiInputBox;
