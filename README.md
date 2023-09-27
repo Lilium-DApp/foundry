@@ -22,31 +22,18 @@ Welcome to the project documentation! This repository contains essential documen
 
     - Change line 16 to ```import {MerkleV2} from "../../../rollups-arbitration/lib/solidity-util/contracts/MerkleV2.sol";``` instead ```import {MerkleV2} from "@cartesi/util/contracts/MerkleV2.sol";```.
 
-### 2.2 Deploy contracts on testnet 🌐
+### 2.1 System Rollout on testnet 🌐
 
-- Deploy the Lilium contract using the command below, ensuring you replace the placeholders with the appropriate values:
-
-    ```bash
-    $ make lilium CONFIG="--network sepolia"
-    ```
-
-- Deploy the certifier contract with the following command:
+- To implement the system in testnet, run the command below:
 
     ```bash
-    $ make certifier lilium="<LILIUM_CONTRACT_ADDRESS>" cid="QmRSAi9LVTuzN3zLu3kKeiESDug27gE3F6CFYvuMLFrt2C" name="Verra" token_name="VERRA" token_symbol="VRR" token_decimals="18" CONFIG="--network sepolia"
+    $ make system CONFIG="--network <NETWORK_NAME>"
     ```
 
-- Deploy the company contract:
+- ⚠️ Supported Networks:
+    - sepolia
+    - mumbai
 
-    ```bash
-    $ make company certifier="CERTIFIER_CONTRACT_ADDRESS" cid="QmQp9iagQS9uEQPV7hg5YGwWmCXxAs2ApyBCkpcu9ZAK6k" name="Gerdau" country="Brazil" industry="Steelworks" allowance="100000000" compensation_per_hour="10000" CONFIG="--network sepolia"
-    ```
-
-- After you deploy the Cartesi machines, run the command below with the addresses of the dapp:
-
-    ```bash
-    $ make auxiliary company="COMPANY_CONTRACT_ADDRESS" verifier="VERIFIER_CONTRACT_ADDRESS" auction="AUCTION_CONTRACT_ADDRESS" CONFIG="--network sepolia"
-    ```
 - To interact with the Cartesi machines, follow the instructions contained in the readme of each one:
 
     - Verfier: https://github.com/Lilium-DApp/verifier
@@ -67,9 +54,9 @@ This command generates documentation based on the project's code and structure.
 View the generated documentation locally by serving it on a local server at port 4000. Use:
 
 ```bash
-forge doc --serve --port 4001
+forge doc --serve --port 4002
 ```
 
-Access the documentation through your web browser by navigating to <http://localhost:4001>.
+Access the documentation through your web browser by navigating to <http://localhost:4002>.
 
 Explore and understand the project using the provided documentation. If you encounter any issues or need assistance, please reach out for support. We're here to help! 🤝
