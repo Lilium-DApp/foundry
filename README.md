@@ -1,4 +1,4 @@
-# Project Documentation 📚
+# Foundry Lilium 📚
 
 Welcome to the project documentation! This repository contains essential documentation to guide you through the setup and usage of the project. As a submodule of the Cartesi Machines repositories, it plays a crucial role in ensuring smooth operations. Follow the steps below to get started:
 
@@ -36,8 +36,8 @@ Welcome to the project documentation! This repository contains essential documen
 
 - To interact with the Cartesi machines, follow the instructions contained in the readme of each one:
 
-    - Verfier: https://github.com/Lilium-DApp/verifier
-    - Auction: https://github.com/Lilium-DApp/auction
+    - [Verfier](https://github.com/Lilium-DApp/verifier#interacting-with-the-application-)
+    - [Auction](https://github.com/Lilium-DApp/auction#interacting-with-the-application-)
 
 ## 3. Generating Documentation 📖
 
