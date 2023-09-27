@@ -6,20 +6,18 @@ pragma solidity ^0.8.20;
  * @title Company
  * @dev Company struct store Company data
  */
-struct CompanyData {
-    string cid;
-    string name;
+struct ForestReserveData {
     address token;
-    string country;
-    string industry;
-    uint256 allowance;
-    uint256 auctionDuration;
+    string geographicLocation;
+    string vegetation;
+    uint256 carbonCreditsEmitted;
+    string weatherConditions;
+    uint256 hourlyCompensation;
     address cartesiAuction;
-    address cartesiInputBox;
     address cartesiVerifier;
+    address cartesiInputBox;
     address cartesiERC20Portal;
     address cartesiEtherPortal;
     address cartesiDAppAddressRelay;
-    uint256 compensation;
-    mapping (address => uint256) ledger;   
+    mapping(address => uint256) ledger;
 }

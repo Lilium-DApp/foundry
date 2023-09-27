@@ -2,106 +2,86 @@
 
 pragma solidity ^0.8.20;
 
-import {IPFS} from "@libraries/IPFS.sol";
-import {ICarbonCredit} from "@interfaces/ICarbonCredit.sol";
-import {Certifier} from "@contracts/entities/Certifier.sol";
+import {ILilium} from "@interfaces/ILilium.sol";
 import {LiliumData} from "@structs/LiliumData.sol";
-import {CarbonCredit} from "@contracts/token/ERC20/CarbonCredit.sol";
+import {ICarbonCredit} from "@interfaces/ICarbonCredit.sol";
+import {ForestReserveData} from "@structs/ForestReserveData.sol";
+import {IInputBox} from "@cartesi/contracts/inputs/IInputBox.sol";
+import {ForestReserve} from "@contracts/entities/ForestReserve.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract Lilium {
+/**
+ * @title Lilium
+ * @notice This contract is responsible for create new company contract
+ */
+contract Lilium is AccessControl {
     LiliumData public lilium;
 
-    mapping(address => address) public tokens;
+    bytes32 public constant AGENT_ROLE = keccak256("AGENT_ROLE");
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    error Unouthorized();
-
-    event NewCertifier(address _certifier, address _token);
+    event NewCompany(address _company);
 
     constructor(
-        string memory _cid,
-        address _InputBox,
-        address _EtherPortal,
-        address _ERC20Portal,
-        address _DAppAddressRelay,
-        address _PriceFeed,
+        address _factory,
+        address _cartesiInputBox,
+        address _cartesiEtherPortal,
+        address _cartesiERC20Portal,
+        address _cartesiDAppAddressRelay,
         address _agent
     ) {
-        lilium.cid = _cid;
-        lilium.cartesiInputBox = _InputBox;
-        lilium.cartesiEtherPortal = _EtherPortal;
-        lilium.cartesiERC20Portal = _ERC20Portal;
-        lilium.cartesiDAppAddressRelay = _DAppAddressRelay;
-        lilium.parityRouter = _PriceFeed;
-        lilium.agent = _agent;
+        lilium.factory = _factory;
+        lilium.cartesiInputBox = _cartesiInputBox;
+        lilium.cartesiERC20Portal = _cartesiERC20Portal;
+        lilium.cartesiEtherPortal = _cartesiEtherPortal;
+        lilium.cartesiDAppAddressRelay = _cartesiDAppAddressRelay;
+        _grantRole(DEFAULT_ADMIN_ROLE, _agent);
+        _grantRole(AGENT_ROLE, _agent);
     }
 
     /**
-     * @notice Restrict function to agent
-     * @dev This modifier restrict function to agent
+     * @notice This function is responsible for add new agent
+     * @param _newAgent New agent address
      */
-    modifier onlyAgent() {
-        if (msg.sender != lilium.agent) {
-            revert Unouthorized();
-        }
-        _;
+    function addAgent(address _newAgent) public onlyRole(AGENT_ROLE) {
+        _grantRole(DEFAULT_ADMIN_ROLE, _newAgent);
+        _grantRole(AGENT_ROLE, _newAgent);
     }
 
     /**
-     * @notice Get Cartesi Certifier Contract Address
-     * @dev This function get cartesi certifier contract address. This function is external because it is called by certifier contract
-     * @return address of cartesi certifier contract
+     * @notice This function is responsible for create new forest reserve contract
+     * @param _geographicLocation Forest reserve geographic location
+     * @param _vegetation Forest reserve vegetation
+     * @param _carbonCreditsEmitted Forest reserve carbon credits emitted
+     * @param _weatherConditions Forest reserve weather conditions
+     * @param _hourlyCompensation Forest reserve hourly compensation
+     * @param _agent Forest reserve agent
      */
-    function getToken(address _certifier) external view returns (address) {
-        address token = tokens[_certifier];
-        return token;
-    }
-
-    /**
-     * @notice Get Lilium URI
-     * @dev This function get lilium URI using IPFS library
-     * @return string URI
-     */
-    function getURI() public view returns (string memory) {
-        return IPFS.getURI(lilium.cid);
-    }
-
-    /**
-     * @notice Create new certifier
-     * @dev This function create new certifier contract and token contract
-     * @param _cid IPFS CID
-     * @param _name certifier name
-     * @param _agent certifier agent address
-     * @param tokenName token name
-     * @param tokenSymbol token symbol
-     * @param decimals token decimals
-     */
-    function newCertifier(
-        string memory _cid,
-        string memory _name,
-        address _agent,
-        string memory tokenName,
-        string memory tokenSymbol,
-        uint8 decimals
-    ) public onlyAgent returns (address, address) {
-        Certifier certifier = new Certifier(
-            _cid,
-            _name,
-            address(this),
-            _agent,
+    function newForestReserve(
+        string memory _geographicLocation,
+        string memory _vegetation,
+        uint256 _carbonCreditsEmitted,
+        string memory _weatherConditions,
+        uint256 _hourlyCompensation,
+        address _agent
+    ) public onlyRole(AGENT_ROLE) returns (address) {
+        ForestReserve forestReserve = new ForestReserve(
+            ILilium(lilium.factory).getToken(address(this)),
+            _geographicLocation,
+            _vegetation,
+            _carbonCreditsEmitted,
+            _weatherConditions,
+            _hourlyCompensation,
             lilium.cartesiInputBox,
             lilium.cartesiEtherPortal,
             lilium.cartesiERC20Portal,
-            lilium.cartesiDAppAddressRelay
+            lilium.cartesiDAppAddressRelay,
+            _agent
         );
-        CarbonCredit token = new CarbonCredit(
-            tokenName,
-            tokenSymbol,
-            decimals,
-            address(certifier),
-            lilium.parityRouter
-        );
-        tokens[address(certifier)] = address(token);
-        emit NewCertifier(address(certifier), address(token));
-        return (address(certifier), address(token));
+        _grantRole(DEFAULT_ADMIN_ROLE, _agent);
+        _grantRole(AGENT_ROLE, _agent);
+        ICarbonCredit(ILilium(lilium.factory).getToken(address(this))).grantRole(MINTER_ROLE, address(forestReserve));
+        emit NewCompany(address(forestReserve));
+        return (address(forestReserve));
     }
 }

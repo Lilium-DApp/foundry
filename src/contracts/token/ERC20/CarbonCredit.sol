@@ -19,7 +19,6 @@ contract CarbonCredit is AccessControl, ERC20 {
     error InsufficientAmount(uint256 _amount);
 
     event Retire(address _sender, uint256 _amount);
-    event ApproveFrom(address _from, address _to, uint256 _amount);
 
     constructor(
         string memory _tokenName,
@@ -29,7 +28,6 @@ contract CarbonCredit is AccessControl, ERC20 {
         address _priceFeed
     ) ERC20(_tokenName, _tokenSymbol) {
         token.decimals = _decimals;
-        token.admin = _certifier;
         token.parityRouter = _priceFeed;
         _grantRole(DEFAULT_ADMIN_ROLE, _certifier);
     }
@@ -40,8 +38,7 @@ contract CarbonCredit is AccessControl, ERC20 {
      * @return int256 ETH-USD parity price
      */
     function quoteParity() public view returns (int256) {
-        (, int price, , , ) = AggregatorV3Interface(token.parityRouter)
-            .latestRoundData();
+        (, int256 price,,,) = AggregatorV3Interface(token.parityRouter).latestRoundData();
         return price / 1e8;
     }
 
@@ -75,25 +72,6 @@ contract CarbonCredit is AccessControl, ERC20 {
         } else {
             _burn(msg.sender, _amount);
             emit Retire(msg.sender, _amount);
-        }
-    }
-
-    /**
-     * @notice Transfer Token
-     * @dev This function transfer token (CarbonCredit) to an address and send the transaction information to cartesi machine
-     * @param to address to transfer token
-     * @param amount amount of token to transfer
-     * @return bool true if transfer is successful
-     */
-    function transfer(
-        address to,
-        uint256 amount
-    ) public override returns (bool) {
-        if (balanceOf(msg.sender) < amount) {
-            revert InsufficientAmount(amount);
-        } else {
-            _transfer(msg.sender, to, amount);
-            return true;
         }
     }
 }
