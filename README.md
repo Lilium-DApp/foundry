@@ -39,17 +39,7 @@ Welcome to the project documentation! This repository contains essential documen
     - [Verfier](https://github.com/Lilium-DApp/verifier#interacting-with-the-application-)
     - [Auction](https://github.com/Lilium-DApp/auction#interacting-with-the-application-)
 
-## 3. Generating Documentation 📖
-
-Generate project documentation using:
-
-```bash
-forge doc
-```
-
-This command generates documentation based on the project's code and structure.
-
-## 4. Viewing Documentation Locally 💻
+## 3. Viewing Documentation Locally 💻
 
 View the generated documentation locally by serving it on a local server at port 4000. Use:
 
