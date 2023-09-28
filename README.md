@@ -41,7 +41,7 @@ Welcome to the project documentation! This repository contains essential documen
 
 ## 3. Viewing Documentation Locally 💻
 
-View the generated documentation locally by serving it on a local server at port 4000. Use:
+View the generated documentation locally by serving it on a local server at port 4002. Use:
 
 ```bash
 forge doc --serve --port 4002
