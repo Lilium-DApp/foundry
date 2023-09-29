@@ -38,8 +38,12 @@ Welcome to the project documentation! This repository contains essential documen
 
     - [Verfier](https://github.com/Lilium-DApp/verifier#interacting-with-the-application-)
     - [Auction](https://github.com/Lilium-DApp/auction#interacting-with-the-application-)
+ 
+## 3. System Architecture 📐
+![image](https://github.com/Lilium-DApp/foundry/assets/89201795/e02bef58-5e9a-4d15-b65f-fe4dc7fec9d8)
 
-## 3. Viewing Documentation Locally 💻
+
+## 4. Viewing Documentation Locally 💻
 
 View the generated documentation locally by serving it on a local server at port 4002. Use:
 
