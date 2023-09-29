@@ -40,8 +40,9 @@ Welcome to the project documentation! This repository contains essential documen
     - [Auction](https://github.com/Lilium-DApp/auction#interacting-with-the-application-)
  
 ## 3. System Architecture 📐
-![image](https://github.com/Lilium-DApp/foundry/assets/89201795/e02bef58-5e9a-4d15-b65f-fe4dc7fec9d8)
-
+<p align="center">
+<img src="https://github.com/Lilium-DApp/foundry/assets/89201795/e02bef58-5e9a-4d15-b65f-fe4dc7fec9d8" width="800" height="600" />
+<p>
 
 ## 4. Viewing Documentation Locally 💻
 
@@ -52,5 +53,3 @@ forge doc --serve --port 4002
 ```
 
 Access the documentation through your web browser by navigating to <http://localhost:4002>.
-
-Explore and understand the project using the provided documentation. If you encounter any issues or need assistance, please reach out for support. We're here to help! 🤝
