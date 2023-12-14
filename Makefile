@@ -10,10 +10,7 @@ END_LOG = @echo "==================== END OF LOG ======================"
 
 ifeq ($(CONFIG),--network sepolia)
 	RPC_URL := $(SEPOLIA_RPC_URL)
-	DEPLOY_NETWORK_ARGS := script/SystemRollout.s.sol --rpc-url $(SEPOLIA_RPC_URL) --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvvv
-else ifeq ($(findstring --network mumbai,$(CONFIG)),--network mumbai)
-	RPC_URL := $(MUMBAI_RPC_URL)
-	DEPLOY_NETWORK_ARGS := script/SystemRollout.s.sol --rpc-url $(MUMBAI_RPC_URL) --broadcast --verify --etherscan-api-key $(POLYGONSCAN_API_KEY) -vvvvv
+	DEPLOY_NETWORK_ARGS := script/DeployForestReserve.s.sol --rpc-url $(SEPOLIA_RPC_URL) --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvvv
 endif
 
 define system_rollout
