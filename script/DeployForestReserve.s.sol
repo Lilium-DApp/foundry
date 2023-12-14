@@ -8,7 +8,7 @@ import {ForestReserve} from "@contracts/ForestReserve.sol";
 
 contract DeployLilium is Script {
     function run() external {
-        vm.startBroadcast(vm.envUint("PRIVATE_KEY_LILIUM_AGENT_TESTNET"));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         ForestReserve forestReserve = new ForestReserve(0x5a723220579C0DCb8C9253E6b4c62e572E379945, 0xA08f2A571d48465B7b82b5B3CBe90C0892D16111);
         vm.stopBroadcast();
 

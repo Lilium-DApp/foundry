@@ -27,7 +27,25 @@ Welcome to the project documentation! This repository contains essential documen
 - To implement the system in testnet, run the command below:
 
     ```bash
-    $ make system CONFIG="--network <NETWORK_NAME>"
+    $ make deploy"
+    ```
+
+- To set the cartesi dapp address, run:
+
+    ```bash
+    $ make cartesi forest_reserve= dapp=
+    ```
+
+- To set the device address, run:
+
+    ```bash
+    $ make device forest_reserve= device=
+    ```
+
+- To verify the real world state as a device, run:
+
+    ```bash
+    $ cast send <forest-reserve-address> "verifyRealWorldState(string)" "<payload-as-./EXAMPLE.TXT>" --rpc-url $RPC_URL --private-key $PRIVATE_KEY
     ```
 
 - ⚠️ Supported Networks:
